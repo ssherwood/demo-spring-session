@@ -1,0 +1,36 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'io.undertree'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'com.yugabyte:jedis:2.9.0-yb-16' <- this is too old
+	implementation 'redis.clients:jedis'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis' , {
+		// lettuce appears to be incompatible with YEDIS
+		exclude group: 'io.lettuce', module: 'lettuce-core'
+	}
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.springframework.session:spring-session-data-redis'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
