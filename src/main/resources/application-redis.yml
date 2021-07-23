@@ -3,4 +3,4 @@ spring:
     store-type: redis
     redis:
       namespace: "spring:session:${spring.application.name}"
-    timeout: 60
+    timeout: 60s

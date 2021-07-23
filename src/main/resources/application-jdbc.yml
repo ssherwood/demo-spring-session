@@ -5,6 +5,6 @@ spring:
   session:
     store-type: jdbc
     jdbc:
-      initialize-schema: embedded
+      initialize-schema: never
       cleanup-cron: 0 */3 * * * *  # cleans up every 3m
     timeout: 60s

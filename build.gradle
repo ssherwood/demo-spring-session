@@ -11,29 +11,28 @@ sourceCompatibility = '11'
 repositories {
 	mavenCentral()
 }
-
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-	// For Redis
-	//implementation 'org.springframework.session:spring-session-data-redis'
+	// For Spring Session backed by Redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis' , {
+		exclude group: 'io.lettuce', module: 'lettuce-core' // lettuce appears to be incompatible
+	}
+	implementation 'org.springframework.session:spring-session-data-redis'
 	//implementation 'com.yugabyte:jedis:2.9.0-yb-16' <- this is too old
-	//implementation 'redis.clients:jedis'
-	//implementation 'org.springframework.boot:spring-boot-starter-data-redis' , {
-	// lettuce appears to be incompatible with YEDIS
-	//exclude group: 'io.lettuce', module: 'lettuce-core'
-	//}
+	implementation 'redis.clients:jedis'
 
-	// For JDBC on Postgres
+	// For Spring Session backed bu JDBC (via Postgres)
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
