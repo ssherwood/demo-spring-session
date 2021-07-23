@@ -1,6 +1,6 @@
 spring:
+  application:
+    name: demo-spring-session
   security:
     user:
       password: password
-  session:
-    store-type: redis

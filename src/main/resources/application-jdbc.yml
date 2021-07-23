@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5433/yugabyte
+    username: yugabyte
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: embedded
+      cleanup-cron: 0 */3 * * * *  # cleans up every 3m
+    timeout: 60s
