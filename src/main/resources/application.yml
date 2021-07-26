@@ -4,8 +4,15 @@ spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5433/yugabyte
     username: yugabyte
+  jpa:
+    open-in-view: false
   security:
     user:
       password: password
   profiles:
     default: jdbc
+
+logging:
+  level:
+    org.springframework.session: DEBUG
+    org.springframework.session.web.http.SessionRepositoryFilter.SESSION_LOGGER: INFO

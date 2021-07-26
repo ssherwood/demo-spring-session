@@ -20,7 +20,7 @@ public class SpringSessionDemoApplication {
 
 //    @Bean
 //    public static ConfigureRedisAction configureRedisAction() {
-//        return ConfigureRedisAction.NO_OP;
+//        return ConfigureRedisAction.NO_OP; // used to get past initial Lettuce exception
 //    }
 
     @Controller
@@ -29,9 +29,16 @@ public class SpringSessionDemoApplication {
         @GetMapping("/greeting")
         public String greeting(HttpSession session, @RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
             // put something new in the session
-            session.setAttribute("time_stamp", Instant.now());
+            var timeStamp = Instant.now();
+            session.setAttribute("time_stamp", timeStamp);
+
+            // add lots of attributes...
+            for (int i = 0; i < 50; i++) {
+                session.setAttribute("foo" + i, "bar" + i + timeStamp);
+            }
 
             model.addAttribute("name", name);
+            model.addAttribute("time_stamp", timeStamp);
             return "greeting";
         }
     }
