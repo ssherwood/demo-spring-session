@@ -3,5 +3,5 @@ spring:
     store-type: redis
     redis:
       namespace: "spring:session:${spring.application.name}"
-      cleanup-cron: "0 */3 * * * *"  # cleans up every 3m
+      #cleanup-cron: "0 */10 * * * *"  # cleans up every 10m
     timeout: 60s

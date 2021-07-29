@@ -1,12 +1,14 @@
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5433/yugabyte
+    url: jdbc:postgresql://127.0.0.1:5433/spring
     username: yugabyte
+    #url: jdbc:postgresql://127.0.0.1:5432/yugabyte
+    #username: yugabyte
+    #password: yugabyte
   session:
     store-type: jdbc
     jdbc:
       initialize-schema: never
-      cleanup-cron: "0 */3 * * * *"  # cleans up every 3m (default is every second?)
+      #cleanup-cron: "0 */10 * * * *"  # cleans up every 10m (default is every minute)
       #save-mode: always  # 99% = 1,193
-      #save-mode: on_set_attribute  # default, 99% = 1,789
     timeout: 60s
